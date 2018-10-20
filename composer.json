@@ -1,0 +1,16 @@
+{
+    "name": "dangerinteractive/lenspress",
+    "description": "WordPress Gutenberg plugin for conditional content based on client variables.",
+    "type": "project",
+    "license": "GPLv3+",
+    "authors": [
+        {
+            "name": "Alexander Barber",
+            "email": "alex@dangerzonegames.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^7.4"
+    }
+}
