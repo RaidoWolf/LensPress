@@ -6,7 +6,7 @@ require_once __DIR__."/Block.php";
 
 class ConditionalBlock implements Block {
 
-    public function __construct (string $valueTrue, string $valueFalse) {
+    public function __construct (string $valueTrue = "", string $valueFalse = "") {
         $this->valueTrue = $valueTrue;
         $this->valueFalse = $valueFalse;
     }
@@ -30,9 +30,9 @@ class ConditionalBlock implements Block {
     public function getValue (bool $condition) : string {
 
         if ($condition) {
-            return getValueTrue();
+            return $this->getValueTrue();
         } else {
-            return getValueFalse();
+            return $this->getValueFalse();
         }
 
     }
