@@ -25,7 +25,7 @@ final class TestConditionalBlock extends TestCase {
     }
 
     public function testSetterFalseCondition () : void {
-        $block = new LensPres\ConditionalBlock();
+        $block = new LensPress\ConditionalBlock();
         $block->setValueTrue("true");
         $block->setValueFalse("false");
         $this->assertEquals("false", $block->getValue(false));
