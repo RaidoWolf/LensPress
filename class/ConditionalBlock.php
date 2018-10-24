@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace LensPress;
 
-require_once __DIR__."/Block.php";
+require_once __DIR__.'/Block.php';
 
 /**
  * A content replacement block with only two possible states: true and false.
@@ -15,7 +15,7 @@ class ConditionalBlock implements Block {
      * @param string $valueTrue  value of the block when condition is true
      * @param string $valueFalse value of the block when condition is false
      */
-    public function __construct (string $valueTrue = "", string $valueFalse = "") {
+    public function __construct (string $valueTrue = '', string $valueFalse = '') {
         $this->valueTrue = $valueTrue;
         $this->valueFalse = $valueFalse;
     }
@@ -67,7 +67,7 @@ class ConditionalBlock implements Block {
 
     }
 
-    private $valueTrue = "";
-    private $valueFalse = "";
+    private $valueTrue = '';
+    private $valueFalse = '';
 
 }
