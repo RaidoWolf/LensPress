@@ -1,9 +1,9 @@
-//import {InnerBlocks} from '@wordpress/editor';
-//import {TextControl} from '@wordpress/components';
-
 (function () {
     'use strict';
 
+    const {__} = wp.i18n;
+    const {InnerBlocks} = wp.editor;
+    const {TextControl} = wp.components;
     const {registerBlockType} = wp.blocks;
     const blockStyle = {
         backgroundColor: '#2260AA',
