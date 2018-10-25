@@ -11,3 +11,16 @@ A simple WordPress Gutenberg editor plugin that provides a method of creating co
 
 == Description ==
 A simple WordPress Gutenberg editor plugin that provides a method of creating conditional content dependent on client-side variables.
+
+Developers run the following to get started:
+- composer install
+- yarn install
+
+Then, to run the PHP unit tests once, run (from the project's root):
+- ./vendor/bin/phpunit --config phpunit.xml
+
+Then, to build the JavaScript code, run:
+- yarn run build
+
+Or, if you want the JavaScript to automatically build when files are modified:
+- yarn run dev
