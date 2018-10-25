@@ -1,0 +1,31 @@
+{
+
+    "presets": [
+        [
+            "env", {
+                "targets": {
+                    "browsers": [
+                        "last 3 Firefox versions",
+                        "last 3 Chrome versions",
+                        "last 2 Safari versions",
+                        "last 2 iOS versions",
+                        "last 2 Android versions",
+                        "last 2 FirefoxAndroid versions",
+                        "last 2 ChromeAndroid versions",
+                        "last 1 edge version",
+                        "ie 11"
+                    ]
+                }
+            }
+        ]
+    ],
+
+    "plugins": [
+        [
+            "transform-react-jsx", {
+                "pragma": "wp.element.createElement"
+            }
+        ]
+    ]
+
+}
