@@ -13,7 +13,7 @@ function registerParameterConditionalBlock () : void {
     }
 
     register_block_type('lenspress/param-condition', [
-        'editor-script' => ''
+        'editor-script' => 'lenspress_parameterConditionalBlock'
     ]);
 
     // register the necessary shortcodes
