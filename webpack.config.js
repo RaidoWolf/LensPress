@@ -9,13 +9,13 @@ const wplib = [
   'data',
 ];
 
-const config = {
+const wpJsxConfig = {
     mode: 'production',
     devtool: 'source-map',
     module: {
         rules: [
             {
-                test: /.js$/,
+                test: /.jsx?$/,
                 loader: 'babel-loader',
                 exclude: /node_modules/
             }
@@ -33,9 +33,9 @@ const config = {
     })
 };
 
-var paramConditionConfig = Object.assign({}, config, {
+var paramConditionConfig = Object.assign({}, wpJsxConfig, {
     name: 'Parameter Condition Block',
-    entry: './block/ParameterConditional.js',
+    entry: './block/ParameterConditional.jsx',
     output: {
         path: __dirname,
         filename: 'block/ParameterConditional.final.js'
