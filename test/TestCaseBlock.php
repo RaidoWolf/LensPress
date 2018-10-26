@@ -10,6 +10,10 @@ final class TestCaseBlock extends TestCase {
 
     public function testDefaultConstructor () : void {
 
+        $_GET = [];
+        $_POST = [];
+        $_COOKIE = [];
+
         $block = new \LensPress\CaseBlock();
 
         $this->assertNull($block->getReceiver());
@@ -21,6 +25,10 @@ final class TestCaseBlock extends TestCase {
     }
 
     public function testFullConstructor () : void {
+
+        $_GET = [];
+        $_POST = [];
+        $_COOKIE = [];
 
         $block = new \LensPress\CaseBlock(
             new \LensPress\ParameterReceiver('test', true, true, true),
@@ -47,6 +55,120 @@ final class TestCaseBlock extends TestCase {
         $this->assertTrue($block->isNegated());
         $this->assertEquals($block->getValue(), 'it works2');
         $this->assertEquals($block->render(), 'it works2');
+
+    }
+
+    public function testMatchGet () : void {
+
+        $_GET = [];
+        $_POST = [];
+        $_COOKIE = [];
+
+        $_GET['test'] = 'this is a match';
+
+        $block = new \LensPress\CaseBlock(
+            new \LensPress\ParameterReceiver('test', true, true, true),
+            'this is a match',
+            false,
+            'it works'
+        );
+
+        $this->assertEquals($block->render(), 'it works');
+
+    }
+
+    public function testMatchPost () : void {
+
+        $_GET = [];
+        $_POST = [];
+        $_COOKIE = [];
+
+        $_POST['test'] = 'this is a match';
+
+        $block = new \LensPress\CaseBlock(
+            new \LensPress\ParameterReceiver('test', true, true, true),
+            'this is a match',
+            false,
+            'it works'
+        );
+
+        $this->assertEquals($block->render(), 'it works');
+
+    }
+
+    public function testMatchCookie () : void {
+
+        $_GET = [];
+        $_POST = [];
+        $_COOKIE = [];
+
+        $_GET['test'] = 'this is a match';
+
+        $block = new \LensPress\CaseBlock(
+            new \LensPress\ParameterReceiver('test', true, true, true),
+            'this is a match',
+            false,
+            'it works'
+        );
+
+        $this->assertEquals($block->render(), 'it works');
+
+    }
+
+    public function testFailedMatch () : void {
+
+        $_GET = [];
+        $_POST = [];
+        $_COOKIE = [];
+
+        $_GET['test'] = 'this is (not) a match';
+
+        $block = new \LensPress\CaseBlock(
+            new \LensPress\ParameterReceiver('test', true, true, true),
+            'this is a match',
+            false,
+            'it works'
+        );
+
+        $this->assertEquals($block->render(), '');
+
+    }
+
+    public function testInverseMatch () : void {
+
+        $_GET = [];
+        $_POST = [];
+        $_COOKIE = [];
+
+        $_GET['test'] = 'this is a match';
+
+        $block = new \LensPress\CaseBlock(
+            new \LensPress\ParameterReceiver('test', true, true, true),
+            'this is a match',
+            true,
+            'it works'
+        );
+
+        $this->assertEquals($block->render(), '');
+
+    }
+
+    public function testInverseFailedMatch () : void {
+
+        $_GET = [];
+        $_POST = [];
+        $_COOKIE = [];
+
+        $_GET['test'] = 'this is (not) a match';
+
+        $block = new \LensPress\CaseBlock(
+            new \LensPress\ParameterReceiver('test', true, true, true),
+            'this is a match',
+            true,
+            'it works'
+        );
+
+        $this->assertEquals($block->render(), 'it works');
 
     }
 
