@@ -11,23 +11,23 @@
         padding: '20px'
     };
 
-    registerBlockType('lenspress/param-condition', {
+    registerBlockType('lenspress/param-case', {
 
-        title: __('Parameter Condition'),
+        title: __('Parameter Case'),
         icon: 'randomize',
         category: 'layout',
 
         keywords: [
             __('if'),
+            __('elseif'),
             __('else'),
-            __('condition'),
-            __('conditional'),
+            __('switch'),
+            __('case'),
             __('parameter'),
             __('url'),
             __('get'),
             __('post'),
             __('cookie'),
-            __('switch'),
             __('replace'),
             __('content')
         ],
@@ -61,12 +61,31 @@
                     <PanelBody title={__('Content Settings')}>
                         <TextControl
                             label={__('Parameter Name')}
+                            value={attributes.paramName}
                             onChange={(paramName) => { setAttributes({paramName}); }}
+                        />
+                        <CheckboxControl
+                            label={__('Enable GET Parameters')}
+                            help={__('Enable checking for the parameter in the URL itself')}
+                            checked={attributes.urlEnabled}
+                            onChange={(urlEnabled) => { setAttributes({urlEnabled}); }}
+                        />
+                        <CheckboxControl
+                            label={__('Enable POST Parameters')}
+                            help={__('Enable checking for the parameter in the data sent via a POST request')}
+                            checked={attributes.postEnabled}
+                            onChange={(postEnabled) => { setAttributes({postEnabled}); }}
+                        />
+                        <CheckboxControl
+                            label={__('Enable COOKIE Parameters')}
+                            help={__('Enable checking for the parameter in the browser\'s cookies')}
+                            checked={attributes.cookieEnabled}
+                            onChange={(cookieEnabled) => { setAttributes({cookieEnabled}); }}
                         />
                     </PanelBody>
                 </InspectorControls>,
                 <div className={props.className}>
-                    {__('Switch between two versions of a content block depending on a parameter.')}
+                    {__('Switch between any number of versions of a content block depending on a parameter.')}
                     <InnerBlocks allowedBlocks={[ /* only child blocks are allowed */ ]} />
                 </div>
             ];

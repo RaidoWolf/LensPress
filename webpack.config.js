@@ -35,13 +35,23 @@ const wpJsxConfig = {
 
 var paramConditionConfig = Object.assign({}, wpJsxConfig, {
     name: 'Parameter Condition Block',
-    entry: './block/ParameterConditional.jsx',
+    entry: './block/ParameterCondition.jsx',
     output: {
         path: __dirname,
-        filename: 'block/ParameterConditional.final.js'
+        filename: 'block/ParameterCondition.final.js'
+    }
+});
+
+var paramCaseConfig = Object.assign({}, wpJsxConfig, {
+    name: 'Parameter Case Block',
+    entry: './block/ParameterCase.jsx',
+    output: {
+        path: __dirname,
+        filename: 'block/ParameterCase.final.js'
     }
 });
 
 module.exports = [
-    paramConditionConfig
+    paramConditionConfig,
+    paramCaseConfig
 ];
