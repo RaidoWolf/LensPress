@@ -3,71 +3,112 @@ declare(strict_types=1);
 namespace LensPress;
 
 require_once __DIR__.'/Block.php';
+require_once __DIR__.'/Receiver.php';
 
 /**
- * A content replacement block with only two possible states: true and false.
+ * A conditional content block that checks whether a receiver evaluates to true
+ * or false.
  */
-class ConditionalBlock implements Block {
+class ConditionBlock implements Block {
 
     /**
-     * Constructor taking in optional strings for the block's value during true
-     * and false conditions respectively.
-     * @param string $valueTrue  value of the block when condition is true
-     * @param string $valueFalse value of the block when condition is false
+     * Constructor optionally taking a Receiver, whether to negate the check,
+     * and/or the value to return when the condition is met.
+     * @param Receiver $receiver Receiver to which the condition applies
+     * @param bool     $negate   whether to negate the check
+     * @param string   $value    value of the block when condition is met
      */
-    public function __construct (string $valueTrue = '', string $valueFalse = '') {
-        $this->valueTrue = $valueTrue;
-        $this->valueFalse = $valueFalse;
+    public function __construct (
+        Receiver $receiver = null,
+        bool $negate = false,
+        string $value = ''
+    ) {
+
+        $this->receiver = $receiver;
+        $this->negate = $negate;
+        $this->value = $value;
+
     }
 
     /**
-     * Getter for the value of the block when the condition is true.
-     * @return string value of the block when the condition is true
+     * Getter that returns the Receiver against which the condition is checked.
+     * @return Receiver Receiver against which the condition is checked
      */
-    public function getValueTrue () : string {
-        return $this->valueTrue;
+    public function getReceiver () : ?Receiver {
+        return $this->receiver;
     }
 
     /**
-     * Setter for the value of the block when the condition is true.
+     * Setter for the Receiver against which the condition is checked.
+     * @param Receiver $receiver Receiver against which the condition is checked
+     */
+    public function setReceiver (Receiver $receiver) : void {
+        $this->receiver = $receiver;
+    }
+
+    /**
+     * Check if the condition is negated.
+     * @return bool whether the condition is negated
+     */
+    public function isNegated () : bool {
+        return $this->negate;
+    }
+
+    /**
+     * Negate the condition check.
+     */
+    public function negate () : void {
+        $this->negate = true;
+    }
+
+    /**
+     * Affirm (to not negate) the condition check.
+     */
+    public function affirm () : void {
+        $this->negate = false;
+    }
+
+    /**
+     * Getter for the value of the block when condition is met.
+     * @return string value of the block when the condition is met
+     */
+    public function getValue () : string {
+        return $this->value;
+    }
+
+    /**
+     * Setter for the value of the block when the condition is met.
      * @param string $value value of the block when the condition is true
      */
-    public function setValueTrue (string $value) : void {
-        $this->valueTrue = $value;
+    public function setValue (string $value) : void {
+        $this->value = $value;
     }
 
     /**
-     * Getter for the value of the block when the condition is false.
-     * @return string value of the block when the condition is false
+     * Output the value string if the condition is met, otherwise return an
+     * empty string.
+     * @return string the rendered output
      */
-    public function getValueFalse () : string {
-        return $this->valueFalse;
-    }
+    public function render () : string {
 
-    /**
-     * Setter for the value of the block when the condition is false.
-     * @param string $value value of the block when the condition is false
-     */
-    public function setValueFalse (string $value) : void {
-        $this->valueFalse = $value;
-    }
-
-    /**
-     * Get the value of the block, given a boolean condition.
-     * @param  bool   $condition condition to apply to the block
-     * @return string            the value of the block, according to the condition
-     */
-    public function getValue (bool $condition) : string {
-
-        if ($condition) {
-            return $this->getValueTrue();
-        } else {
-            return $this->getValueFalse();
+        if ($this->receiver !== null) {
+            if (
+                (!$this->negate && $this->receiver->isTrue()) ||
+                ($this->negate && !$this->receiver->isTrue())
+            ) {
+                return $this->value;
+            } else {
+                return '';
+            }
         }
 
+        return '';
+
     }
 
-    private $valueTrue = '';
-    private $valueFalse = '';
+    private $receiver = null;
+
+    private $value = '';
+    private $negate = false;
 
 }
