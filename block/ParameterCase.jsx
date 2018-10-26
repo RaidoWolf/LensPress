@@ -86,7 +86,7 @@
                 </InspectorControls>,
                 <div className={props.className}>
                     {__('Switch between any number of versions of a content block depending on a parameter.')}
-                    <InnerBlocks allowedBlocks={[ /* only child blocks are allowed */ ]} />
+                    <InnerBlocks />
                 </div>
             ];
 
