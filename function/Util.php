@@ -19,14 +19,14 @@ function requireWordpressPlugin (
     string $version = null
 ) : void {
 
-    require_once __DIR__.'../metadata.php'; // need NAME constant.
+    require_once __DIR__.'/../metadata.php'; // need NAME constant.
     require_once ABSPATH.'wp-admin/includes/plugin.php'; // need "deactivate_plugins" function
 
     if (!is_plugin_active($path)) {
         deactivate_plugins(plugin_basename(__FILE__)); // deactivate self
         notifyFailedPluginDependency($name, $textDomain); // notify failure
     } else {
-        if (version !== null) {
+        if ($version !== null) {
             // check if minimum version is met
             $dependencyData = get_plugin_data(WP_PLUGIN_DIR.'/'.$path);
             $error = !version_compare($dependencyData['Version'], $version, '>=') ? true : false;

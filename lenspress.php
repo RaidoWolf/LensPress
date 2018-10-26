@@ -19,7 +19,7 @@ require_once __DIR__.'/function/Util.php';
  * Ensure that all LensPress dependencies are met before allowing activation.
  */
 function ensureDependencies () : void {
-    \LensPress\Meta\requireWordpressPlugin('Gutenberg', 'gutenberg/gutenberg.php');
+    \LensPress\Util\requireWordpressPlugin('Gutenberg', 'gutenberg/gutenberg.php');
 }
 
 register_activation_hook(__FILE__, __NAMESPACE__.'\\ensureDependencies');
