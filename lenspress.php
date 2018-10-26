@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+namespace LensPress\EntryPoint;
 
 /**
  * Plugin Name: LensPress
@@ -10,9 +11,22 @@ declare(strict_types=1);
  */
 
 require_once __DIR__.'/metadata.php';
+require_once __DIR__.'/function/Renderer.php';
+require_once __DIR__.'/function/UI.php';
 require_once __DIR__.'/function/Util.php';
 
-LensPress\Meta\requireWordpressPlugin('Gutenberg', 'Gutenberg/gutenberg.php');
+/**
+ * Ensure that all LensPress dependencies are met before allowing activation.
+ */
+function ensureDependencies () : void {
+    \LensPress\Meta\requireWordpressPlugin('Gutenberg', 'gutenberg/gutenberg.php');
+}
+
+register_activation_hook(__FILE__, __NAMESPACE__.'\\ensureDependencies');
+register_deactivation_hook(WP_PLUGIN_DIR.'/gutenberg/gutenberg.php', __NAMESPACE__.'\\ensureDependencies');
+
+add_action('init', '\\LensPress\\Renderer\\registerAllShortcodes');
+add_action('init', '\\LensPress\\UI\\registerAllBlocks');
 
 // TODO: register blocks for gutenberg.
 
