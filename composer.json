@@ -1,5 +1,5 @@
 {
-    "name": "dangerinteractive/lenspress",
+    "name": "lenspress",
     "description": "WordPress Gutenberg plugin for conditional content based on client variables.",
     "type": "project",
     "license": "GPLv3+",

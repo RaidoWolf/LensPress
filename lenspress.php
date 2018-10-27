@@ -6,8 +6,8 @@ namespace LensPress\EntryPoint;
  * Plugin Name: LensPress
  * Plugin URI: https://github.com/aebarber/LensPress
  * Description: A WordPress Gutenberg editor plugin for conditional content
- * Version: 0.1.0
- * Author: Danger Interactive LLC
+ * Version: 1.0.0
+ * Author: Alexander Barber
  */
 
 require_once __DIR__.'/metadata.php';
