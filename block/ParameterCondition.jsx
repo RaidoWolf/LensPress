@@ -2,8 +2,8 @@
     'use strict';
 
     const {__} = wp.i18n;
-    const {InnerBlocks} = wp.editor;
-    const {TextControl} = wp.components;
+    const {InnerBlocks, InspectorControls} = wp.editor;
+    const {PanelBody, CheckboxControl, TextControl} = wp.components;
     const {registerBlockType} = wp.blocks;
     const blockStyle = {
         backgroundColor: '#2260AA',
