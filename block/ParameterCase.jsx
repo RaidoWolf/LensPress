@@ -94,9 +94,19 @@
 
         save: function (props) {
 
-            return (
-                <InnerBlocks.Content />
-            );
+            const {attributes, setAttributes} = props;
+
+            return [
+                '[lenspress-param-case',
+                    'param="'+(attributes.paramName).replace('"', '\"')+'"',
+                    'match="'+(attributes.match).replace('"', '\"')+'"',
+                    'negate="'+(attributes.negate ? '1' : '0')+'" ',
+                    'url="'+(attributes.urlEnabled ? '1' : '0')+'"',
+                    'post="'+(attributes.postEnabled ? '1' : '0')+'"',
+                    'cookie="'+(attributes.cookieEnabled ? '1' : '0')+'"]',
+                <InnerBlocks.Content />,
+                '[/lenspress-param-case]'
+            ];
 
         }
 

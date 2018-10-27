@@ -24,13 +24,15 @@ function registerAllBlocks () : void {
  */
 function registerParameterConditionBlock () : void {
 
-    if (!wp_script_is(SCRIPT_PARAMETER_CONDITION, 'registered')) {
-        wp_register_script(
-            SCRIPT_PARAMETER_CONDITION,
-            plugins_url('block/parameterConditionalBlock.final.js', __FILE__),
-            array('wp-blocks', 'wp-element')
-        );
+    if (!function_exists('register_block_type')) {
+        return;
     }
+
+    wp_register_script(
+        SCRIPT_PARAMETER_CONDITION,
+        plugins_url('block/ParameterCondition.final.js', __DIR__),
+        ['wp-blocks', 'wp-element', 'wp-i18n', 'wp-editor', 'wp-components']
+    );
 
     register_block_type(BLOCK_PARAMETER_CONDITION, [
         'editor-script' => SCRIPT_PARAMETER_CONDITION
@@ -43,15 +45,17 @@ function registerParameterConditionBlock () : void {
  */
 function registerParameterCaseBlock () : void {
 
-    if (!wp_script_is(SCRIPT_PARAMETER_CASE, 'registered')) {
-        wp_register_script(
-            SCRIPT_PARAMETER_CASE,
-            plugins_url('block/parameterCaseBlock.final.js', __FILE__),
-            array('wp-blocks', 'wp-elements')
-        );
+    if (!function_exists('register_block_type')) {
+        return;
     }
 
-    register_block_type(BLOCK_PARAMETER_CONDITION, [
+    wp_register_script(
+        SCRIPT_PARAMETER_CASE,
+        plugins_url('block/ParameterCase.final.js', __DIR__),
+        ['wp-blocks', 'wp-element', 'wp-i18n', 'wp-editor', 'wp-components']
+    );
+
+    register_block_type(BLOCK_PARAMETER_CASE, [
         'editor-script' => SCRIPT_PARAMETER_CASE
     ]);
 
