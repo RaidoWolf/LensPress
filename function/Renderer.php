@@ -25,7 +25,7 @@ function registerAllShortcodes () : void {
  */
 function registerParameterConditionShortcode () : void {
 
-    add_shortcode(SHORTCODE_PARAMETER_CONDITION, __NAMESPACE__.'\\renderParameterConditionShortcode');
+    add_shortcode(SHORTCODE_PARAMETER_CONDITION, __NAMESPACE__.'\\renderParameterCondition');
 
 }
 
@@ -35,21 +35,17 @@ function registerParameterConditionShortcode () : void {
  * @param  string $content content of the shortcode instance
  * @return string          rendered output
  */
-function renderParameterConditionShortcode (array $atts, string $content = null) : string {
+function renderParameterCondition (array $atts, string $content = '') : string {
 
     if ($content === null || $content == '') {
         return ''; // no content in, no content out
     }
 
-    if (!array_key_exists('param', $atts)) {
-        return ''; // no valid parameter
-    }
-
     $block = new \LensPress\ConditionBlock(
-        new ParameterReceiver((string) $atts['param'],
-            (bool) (array_key_exists('url', $atts) ? $atts['url'] : true),
-            (bool) (array_key_exists('post', $atts) ? $atts['post'] : true),
-            (bool) (array_key_exists('cookie', $atts) ? $atts['cookie'] : true)
+        new \LensPress\ParameterReceiver((string) (array_key_exists('paramName', $atts) ? $atts['paramName'] : 'hidden'),
+            (bool) (array_key_exists('enableUrl', $atts) ? $atts['enableUrl'] : true),
+            (bool) (array_key_exists('enablePost', $atts) ? $atts['enablePost'] : true),
+            (bool) (array_key_exists('enableCookie', $atts) ? $atts['enableCookie'] : true)
         ),
         (bool) (array_key_exists('negate', $atts) ? $atts['negate'] : false),
         (string) ($content !== null ? $content : '')
@@ -64,7 +60,7 @@ function renderParameterConditionShortcode (array $atts, string $content = null)
  */
 function registerParameterCaseShortcode () : void {
 
-    add_shortcode(SHORTCODE_PARAMETER_CASE, __NAMESPACE__.'\\renderParameterCaseShortcode');
+    add_shortcode(SHORTCODE_PARAMETER_CASE, __NAMESPACE__.'\\renderParameterCase');
 
 }
 
@@ -74,21 +70,17 @@ function registerParameterCaseShortcode () : void {
  * @param  string $content content of the shortcode instance
  * @return string          rendered output
  */
-function renderParameterCaseShortcode (array $atts, string $content = null) : string {
+function renderParameterCase (array $atts, string $content = '') : string {
 
     if ($content === null || $content == '') {
         return ''; // no content in, no content out
     }
 
-    if (!array_key_exists('param', $atts)) {
-        return ''; // no valid parameter
-    }
-
     $block = new \LensPress\CaseBlock(
-        new ParameterReceiver((string) $atts['param'],
-            (bool) (array_key_exists('url', $atts) ? $atts['url'] : true),
-            (bool) (array_key_exists('post', $atts) ? $atts['post'] : true),
-            (bool) (array_key_exists('cookie', $atts) ? $atts['cookie'] : true)
+        new \LensPress\ParameterReceiver((string) (array_key_exists('paramName', $atts) ? $atts['paramName'] : 'hidden'),
+            (bool) (array_key_exists('enableUrl', $atts) ? $atts['enableUrl'] : true),
+            (bool) (array_key_exists('enablePost', $atts) ? $atts['enablePost'] : true),
+            (bool) (array_key_exists('enableCookie', $atts) ? $atts['enableCookie'] : true)
         ),
         (string) (array_key_exists('match', $atts) ? $atts['match'] : ''),
         (bool) (array_key_exists('negate', $atts) ? $atts['negate'] : false),

@@ -36,7 +36,8 @@ function registerParameterConditionBlock () : void {
     );
 
     register_block_type(BLOCK_PARAMETER_CONDITION, [
-        'editor_script' => SCRIPT_PARAMETER_CONDITION
+        'editor_script' => SCRIPT_PARAMETER_CONDITION,
+        'render_callback' => '\\LensPress\\Renderer\\renderParameterCondition'
     ]);
 
 }
@@ -58,7 +59,8 @@ function registerParameterCaseBlock () : void {
     );
 
     register_block_type(BLOCK_PARAMETER_CASE, [
-        'editor_script' => SCRIPT_PARAMETER_CASE
+        'editor_script' => SCRIPT_PARAMETER_CASE,
+        'render_callback' => '\\LensPress\\Renderer\\renderParameterCase'
     ]);
 
 }

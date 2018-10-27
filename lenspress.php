@@ -26,7 +26,7 @@ function ensureDependencies () : void {
 register_activation_hook(__FILE__, __NAMESPACE__.'\\ensureDependencies');
 register_deactivation_hook(WP_PLUGIN_DIR.'/gutenberg/gutenberg.php', __NAMESPACE__.'\\ensureDependencies');
 
-// Initialize all shortcodes, which we're using to render content.
+// Initialize all shortcodes, which are an alternative to the visual editor.
 add_action('init', '\\LensPress\\Renderer\\registerAllShortcodes');
 
 // Initialize all Gutenberg blocks, which is the content editor.

@@ -5,11 +5,22 @@
     const {InnerBlocks, InspectorControls} = wp.editor;
     const {PanelBody, CheckboxControl, TextControl} = wp.components;
     const {registerBlockType} = wp.blocks;
+
     const blockStyle = {
         backgroundColor: '#2260AA',
         color: '#ffffff',
-        padding: '20px'
+        'text-align': 'center',
+        padding: '20px',
+        'border-radius': '8px'
     };
+    const contentStyle = {
+        backgroundColor: '#ffffff',
+        color: '#000000',
+        'text-align': 'left',
+        padding: '5px',
+        'border-radius' : '8px',
+        'box-shadow': '3px 3px 8px rgba(0,0,0,0.5)'
+    }
 
     registerBlockType('lenspress/param-case', {
 
@@ -26,19 +37,33 @@
         attributes: {
 
             paramName: {
-                type: 'string'
+                type: 'string',
+                default: 'hidden'
+            },
+
+            match: {
+                type: 'string',
+                default: 'show'
+            },
+
+            negate: {
+                type: 'boolean',
+                default: false
             },
 
             enableUrl: {
-                type: 'boolean'
+                type: 'boolean',
+                default: true
             },
 
             enablePost: {
-                type: 'boolean'
+                type: 'boolean',
+                default: true
             },
 
             enableCookie: {
-                type: 'boolean'
+                type: 'boolean',
+                default: true
             }
 
         },
@@ -55,29 +80,42 @@
                             value={attributes.paramName}
                             onChange={(paramName) => { setAttributes({paramName}); }}
                         />
+                        <TextControl
+                            label={__('Match Value')}
+                            value={attributes.match}
+                            onChange={(match) => { setAttributes({match}); }}
+                        />
+                        <CheckboxControl
+                            label={__('Negate the Check')}
+                            help={__('Check for when the condition is FALSE')}
+                            checked={attributes.negate}
+                            onChange={(negate) => { setAttributes({negate}); }}
+                        />
                         <CheckboxControl
                             label={__('Enable GET Parameters')}
                             help={__('Enable checking for the parameter in the URL itself')}
-                            checked={attributes.urlEnabled}
-                            onChange={(urlEnabled) => { setAttributes({urlEnabled}); }}
+                            checked={attributes.enableUrl}
+                            onChange={(enableUrl) => { setAttributes({enableUrl}); }}
                         />
                         <CheckboxControl
                             label={__('Enable POST Parameters')}
                             help={__('Enable checking for the parameter in the data sent via a POST request')}
-                            checked={attributes.postEnabled}
-                            onChange={(postEnabled) => { setAttributes({postEnabled}); }}
+                            checked={attributes.enablePost}
+                            onChange={(enablePost) => { setAttributes({enablePost}); }}
                         />
                         <CheckboxControl
                             label={__('Enable COOKIE Parameters')}
                             help={__('Enable checking for the parameter in the browser\'s cookies')}
-                            checked={attributes.cookieEnabled}
-                            onChange={(cookieEnabled) => { setAttributes({cookieEnabled}); }}
+                            checked={attributes.enableCookie}
+                            onChange={(enableCookie) => { setAttributes({enableCookie}); }}
                         />
                     </PanelBody>
                 </InspectorControls>,
-                <div className={props.className}>
-                    {__('Switch between any number of versions of a content block depending on a parameter.')}
-                    <InnerBlocks />
+                <div className={props.className} style={blockStyle}>
+                    {__('Parameter Case')}
+                    <div style={contentStyle}>
+                        <InnerBlocks />
+                    </div>
                 </div>
             ];
 
@@ -85,19 +123,7 @@
 
         save: function (props) {
 
-            const {attributes, setAttributes} = props;
-
-            return [
-                '[lenspress-param-case',
-                    'param="'+(attributes.paramName).replace('"', '\"')+'"',
-                    'match="'+(attributes.match).replace('"', '\"')+'"',
-                    'negate="'+(attributes.negate ? '1' : '0')+'" ',
-                    'url="'+(attributes.urlEnabled ? '1' : '0')+'"',
-                    'post="'+(attributes.postEnabled ? '1' : '0')+'"',
-                    'cookie="'+(attributes.cookieEnabled ? '1' : '0')+'"]',
-                <InnerBlocks.Content />,
-                '[/lenspress-param-case]'
-            ];
+            <InnerBlocks.Content />
 
         }
 
