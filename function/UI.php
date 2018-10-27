@@ -2,8 +2,8 @@
 declare(strict_types=1);
 namespace LensPress\UI;
 
-const SCRIPT_PARAMETER_CONDITION = 'lenspress_parameterConditionalBlock';
-const SCRIPT_PARAMETER_CASE = 'lenspress_parameterCaseBlock';
+const SCRIPT_PARAMETER_CONDITION = 'lenspress-parameter-condition';
+const SCRIPT_PARAMETER_CASE = 'lenspress-parameter-case';
 
 const BLOCK_PARAMETER_CONDITION = 'lenspress/param-condition';
 const BLOCK_PARAMETER_CASE = 'lenspress/param-case';
@@ -31,11 +31,12 @@ function registerParameterConditionBlock () : void {
     wp_register_script(
         SCRIPT_PARAMETER_CONDITION,
         plugins_url('block/ParameterCondition.final.js', __DIR__),
-        ['wp-blocks', 'wp-element', 'wp-i18n', 'wp-editor', 'wp-components']
+        ['wp-blocks', 'wp-element', 'wp-i18n', 'wp-editor', 'wp-components'],
+        (string) filemtime(plugin_dir_path(__DIR__.'/../block/ParameterCondition.final.js'))
     );
 
     register_block_type(BLOCK_PARAMETER_CONDITION, [
-        'editor-script' => SCRIPT_PARAMETER_CONDITION
+        'editor_script' => SCRIPT_PARAMETER_CONDITION
     ]);
 
 }
@@ -52,11 +53,12 @@ function registerParameterCaseBlock () : void {
     wp_register_script(
         SCRIPT_PARAMETER_CASE,
         plugins_url('block/ParameterCase.final.js', __DIR__),
-        ['wp-blocks', 'wp-element', 'wp-i18n', 'wp-editor', 'wp-components']
+        ['wp-blocks', 'wp-element', 'wp-i18n', 'wp-editor', 'wp-components'],
+        (string) filemtime(plugin_dir_path(__DIR__.'/../block/ParameterCase.final.js'))
     );
 
     register_block_type(BLOCK_PARAMETER_CASE, [
-        'editor-script' => SCRIPT_PARAMETER_CASE
+        'editor_script' => SCRIPT_PARAMETER_CASE
     ]);
 
 }

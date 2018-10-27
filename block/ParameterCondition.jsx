@@ -18,18 +18,9 @@
         category: 'layout',
 
         keywords: [
-            __('if'),
-            __('else'),
-            __('condition'),
-            __('conditional'),
+            __('lenspress'),
             __('parameter'),
-            __('url'),
-            __('get'),
-            __('post'),
-            __('cookie'),
-            __('switch'),
-            __('replace'),
-            __('content')
+            __('condition')
         ],
 
         attributes: {

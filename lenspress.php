@@ -22,12 +22,12 @@ function ensureDependencies () : void {
     \LensPress\Util\requireWordpressPlugin('Gutenberg', 'gutenberg/gutenberg.php');
 }
 
+// Check dependencies during appropriate hooks.
 register_activation_hook(__FILE__, __NAMESPACE__.'\\ensureDependencies');
 register_deactivation_hook(WP_PLUGIN_DIR.'/gutenberg/gutenberg.php', __NAMESPACE__.'\\ensureDependencies');
 
+// Initialize all shortcodes, which we're using to render content.
 add_action('init', '\\LensPress\\Renderer\\registerAllShortcodes');
+
+// Initialize all Gutenberg blocks, which is the content editor.
 add_action('init', '\\LensPress\\UI\\registerAllBlocks');
-
-// TODO: register blocks for gutenberg.
-
-// TODO: register shortcodes that the gutenberg blocks will produce.
