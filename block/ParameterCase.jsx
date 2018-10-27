@@ -123,7 +123,7 @@
 
         save: function (props) {
 
-            <InnerBlocks.Content />
+            return <InnerBlocks.Content />
 
         }
 
