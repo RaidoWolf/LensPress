@@ -1,7 +1,7 @@
 {
-    "name": "lenspress",
+    "name": "aebarber/lenspress",
     "description": "WordPress Gutenberg plugin for conditional content based on client variables.",
-    "type": "project",
+    "type": "wordpress-plugin",
     "license": "GPLv3+",
     "authors": [
         {
